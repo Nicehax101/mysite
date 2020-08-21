@@ -5,8 +5,10 @@ from . import models
 
 
 def articles_list(request):
-    articles = models.Articles.objects.all().order_by('date')
+    articles = models.Articles.objects.all().order_by('-date')
     
     return render(request, 'articles/articleslist.html',{'articles':articles})
 def article_detail(request, slug):
-    return HttpResponse(slug)
+    # return HttpResponse(slug)
+    article = models.Articles.objects.get(slug=slug)
+    return render(request, 'articles/article_detail.html',{'article':article})
